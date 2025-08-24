@@ -2,12 +2,16 @@
 
 #$| = 1;
 
-#use strict;
-#use warnings;
+use strict;
+use warnings;
+
+my $max = $ARGV[0];
+
+$max = 23456790 unless $max;
 
 my @prime = (2);
 
-foreach my $i (3..23456790)
+foreach my $i (3..$max)
 {
 	# no even numbers
 	next unless ($i % 2);

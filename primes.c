@@ -2,42 +2,45 @@
 #include <stdlib.h>
 #include <math.h>
 
-int main() {
-    // Allocate memory for storing primes (rough estimate)
-    int max = 23456790;
-    int *prime = malloc(sizeof(int) * (max / 10)); // conservative estimate
-    if (!prime) {
+int main(int argc, char *argv[]) {
+    long max = 23456790; // default
+    if (argc > 1) {
+        max = atol(argv[1]);
+    }
+
+    // Allocate array for primes
+    long *primes = malloc(sizeof(long) * (max / 2)); // rough upper bound
+    if (!primes) {
         fprintf(stderr, "Memory allocation failed\n");
         return 1;
     }
 
-    int count = 0;
-    prime[count++] = 2; // start with 2
+    long count = 0;
+    primes[count++] = 2;
 
-    for (int i = 3; i <= max; i += 2) { // skip even numbers
+    for (long i = 3; i <= max; i += 2) {
         int is_prime = 1;
-        double sqrt_i = sqrt((double)i);
+        long sqrt_i = (long) sqrt((double)i);
 
-        for (int j = 0; j < count; ++j) {
-            if (prime[j] > sqrt_i) {
-                break;
-            }
-            if (i % prime[j] == 0) {
+        for (long j = 0; j < count; j++) {
+            long p = primes[j];
+            if (p > sqrt_i) break;
+            if (i % p == 0) {
                 is_prime = 0;
                 break;
             }
         }
 
         if (is_prime) {
-            prime[count++] = i;
+            primes[count++] = i;
         }
     }
 
     // Print all primes
-    for (int i = 0; i < count; ++i) {
-        printf("%d\n", prime[i]);
+    for (long i = 0; i < count; i++) {
+        printf("%ld\n", primes[i]);
     }
 
-    free(prime);
+    free(primes);
     return 0;
 }

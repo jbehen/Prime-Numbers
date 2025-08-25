@@ -9,13 +9,12 @@ my $max = $ARGV[0];
 
 $max = 23456790 unless $max;
 
+# understanding the desired dataset with 2 being the 1st prime and every odd number being a potential prime
+
 my @prime = (2);
 
-foreach my $i (3..$max)
+for (my $i = 3; $i <= $max; $i += 2)
 {
-	# no even numbers
-	next unless ($i % 2);
-
 	my $is_prime = 1;
 	my $sqrt_i = sqrt($i);
 	

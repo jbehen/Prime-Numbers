@@ -1,7 +1,7 @@
 import sys
 import math
 
-def generate_primes(max_num=23456790):
+def generate_primes(max_num):
     primes = [2]
     for i in range(3, max_num + 1, 2):
         is_prime = True

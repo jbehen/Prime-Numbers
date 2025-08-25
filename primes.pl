@@ -20,13 +20,13 @@ for (my $i = 3; $i <= $max; $i += 2)
 	
 	foreach my $p (@prime)
 	{
-		if ($p > $sqrt_i)
-		{
-			last;
-		}
-		elsif ($i % $p == 0)
+		if ($i % $p == 0)
 		{
 			$is_prime = 0;
+			last;
+		}
+		elsif ($p > $sqrt_i)
+		{
 			last;
 		}
 	}
